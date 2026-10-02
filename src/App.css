@@ -1,0 +1,16 @@
+/* Component-scoped styles. The bulk of the IDE layout lives in index.css.
+   Kept minimal on purpose so there is a single source of truth for the theme. */
+
+.app {
+  font-optical-sizing: auto;
+}
+
+/* Monaco tweaks that must win over the editor's injected styles. */
+.editor-host .monaco-editor .scroll-decoration {
+  box-shadow: none !important;
+}
+.editor-host .monaco-editor,
+.editor-host .monaco-editor .margin,
+.editor-host .monaco-editor-background {
+  background: var(--ce-bg-editor) !important;
+}

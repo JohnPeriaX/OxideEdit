@@ -1,0 +1,48 @@
+[package]
+name = "oxide-edit"
+version = "0.1.0"
+description = "OxideEdit - a cross-platform code editor built with Rust and Tauri 2"
+authors = ["JohnPeriaX"]
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/JohnPeriaX/OxideEdit"
+edition = "2021"
+rust-version = "1.80"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "oxide_edit_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+
+tauri = { version = "2", features = [] }
+tauri-plugin-log = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-shell = "2"
+
+# Cross-platform PTY for the integrated terminal
+# (ConPTY on Windows, forkpty/openpty on Linux/macOS).
+portable-pty = "0.8"
+
+# Lightweight, dependency-free helpers
+uuid = { version = "1", features = ["v4"] }
+
+[features]
+# Tree-sitter is scaffolded behind a feature flag so the default build
+# stays light and compiles reliably on Windows / Linux / macOS without
+# requiring a C toolchain for grammar crates.
+default = []
+tree-sitter = []
+
+[profile.release]
+codegen-units = 1
+lto = true
+strip = true
